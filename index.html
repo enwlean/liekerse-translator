@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Liekerse Translator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>Liekerse Translator</h1>
+      <p class="subtitle">RU ⇄ Liekerse · минималистичный тёмный стиль</p>
+    </header>
+
+    <section class="panel">
+      <div class="panel-header">
+        <label for="direction">Направление перевода</label>
+        <select id="direction">
+          <option value="ru-to-lk">Русский → Liekerse</option>
+          <option value="lk-to-ru">Liekerse → Русский</option>
+        </select>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <label for="inputText" class="label">Исходный текст</label>
+          <textarea id="inputText" placeholder="Введите текст..."></textarea>
+        </div>
+        <div class="column">
+          <label for="outputText" class="label">Перевод</label>
+          <textarea id="outputText" readonly placeholder="Здесь появится перевод"></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="translateBtn">Перевести</button>
+        <button id="swapBtn">Поменять местами</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Словарь Liekerse</h2>
+        <span class="badge" id="wordCount">0 слов</span>
+      </div>
+
+      <div class="dict-form">
+        <div class="field">
+          <label for="ruWord">Русское слово</label>
+          <input id="ruWord" type="text" placeholder="например: привет">
+        </div>
+        <div class="field">
+          <label for="lkWord">Liekerse</label>
+          <input id="lkWord" type="text" placeholder="например: lihek">
+        </div>
+        <button id="addWordBtn" class="full">Добавить в словарь</button>
+      </div>
+
+      <div class="dict-actions">
+        <button id="exportBtn">Экспорт JSON</button>
+        <button id="importBtn">Импорт JSON</button>
+        <button id="clearBtn">Стереть словарь (локально)</button>
+      </div>
+
+      <div class="dict-list" id="dictList">
+        <!-- Здесь рендерится таблица слов -->
+      </div>
+
+      <textarea id="jsonArea" class="json-area" placeholder="Здесь будет JSON для импорта/экспорта"></textarea>
+    </section>
+
+    <footer class="app-footer">
+      <span>Словарь хранится локально в браузере. Для синхронизации используй свой бэкенд или облако (см. ниже в коде).</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
