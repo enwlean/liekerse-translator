@@ -10,13 +10,14 @@
   <div class="app">
     <header class="app-header">
       <h1>Liekerse Translator</h1>
-      <p class="subtitle">RU ⇄ Liekerse · минималистичный тёмный стиль</p>
+      <p class="subtitle">RU ⇄ Liekerse · профессиональный переводчик</p>
+      <a href="admin.html" class="admin-link">👤 Админ-панель</a>
     </header>
 
-    <section class="panel">
+    <section class="panel translator-panel">
       <div class="panel-header">
         <label for="direction">Направление перевода</label>
-        <select id="direction">
+        <select id="direction" class="select-modern">
           <option value="ru-to-lk">Русский → Liekerse</option>
           <option value="lk-to-ru">Liekerse → Русский</option>
         </select>
@@ -25,53 +26,48 @@
       <div class="columns">
         <div class="column">
           <label for="inputText" class="label">Исходный текст</label>
-          <textarea id="inputText" placeholder="Введите текст..."></textarea>
+          <textarea id="inputText" placeholder="Введите текст для перевода..."></textarea>
+          <div class="char-count" id="inputCount">0 символов</div>
         </div>
         <div class="column">
           <label for="outputText" class="label">Перевод</label>
           <textarea id="outputText" readonly placeholder="Здесь появится перевод"></textarea>
+          <div class="char-count" id="outputCount">0 символов</div>
         </div>
       </div>
 
       <div class="actions">
-        <button id="translateBtn">Перевести</button>
-        <button id="swapBtn">Поменять местами</button>
+        <button id="translateBtn" class="btn-primary">
+          <span>⚡</span> Перевести
+        </button>
+        <button id="swapBtn" class="btn-secondary">
+          <span>⇄</span> Поменять местами
+        </button>
+        <button id="copyBtn" class="btn-secondary">
+          <span>📋</span> Копировать
+        </button>
       </div>
     </section>
 
-    <section class="panel">
-      <div class="panel-header">
-        <h2>Словарь Liekerse</h2>
-        <span class="badge" id="wordCount">0 слов</span>
-      </div>
-
-      <div class="dict-form">
-        <div class="field">
-          <label for="ruWord">Русское слово</label>
-          <input id="ruWord" type="text" placeholder="например: привет">
+    <section class="panel stats-panel">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="dictSize">0</div>
+          <div class="stat-label">Слов в словаре</div>
         </div>
-        <div class="field">
-          <label for="lkWord">Liekerse</label>
-          <input id="lkWord" type="text" placeholder="например: lihek">
+        <div class="stat-card">
+          <div class="stat-value" id="translatedWords">0</div>
+          <div class="stat-label">Переведено слов</div>
         </div>
-        <button id="addWordBtn" class="full">Добавить в словарь</button>
+        <div class="stat-card">
+          <div class="stat-value" id="coverage">0%</div>
+          <div class="stat-label">Покрытие словаря</div>
+        </div>
       </div>
-
-      <div class="dict-actions">
-        <button id="exportBtn">Экспорт JSON</button>
-        <button id="importBtn">Импорт JSON</button>
-        <button id="clearBtn">Стереть словарь (локально)</button>
-      </div>
-
-      <div class="dict-list" id="dictList">
-        <!-- Здесь рендерится таблица слов -->
-      </div>
-
-      <textarea id="jsonArea" class="json-area" placeholder="Здесь будет JSON для импорта/экспорта"></textarea>
     </section>
 
     <footer class="app-footer">
-      <span>Словарь хранится локально в браузере. Для синхронизации используй свой бэкенд или облако (см. ниже в коде).</span>
+      <span>💾 Словарь хранится локально · Поддержка падежей и форм слов · Создано с ❤️</span>
     </footer>
   </div>
 
