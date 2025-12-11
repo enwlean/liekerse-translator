@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Админ-панель · Liekerse Translator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Экран авторизации -->
+    <div id="loginScreen" class="login-screen">
+      <div class="login-box">
+        <h1>🔐 Вход в админ-панель</h1>
+        <p class="subtitle">Liekerse Translator</p>
+        <form id="loginForm" class="login-form">
+          <div class="field">
+            <label for="username">Логин</label>
+            <input id="username" type="text" placeholder="admin" autocomplete="username">
+          </div>
+          <div class="field">
+            <label for="password">Пароль</label>
+            <input id="password" type="password" placeholder="••••••" autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn-primary full">Войти</button>
+          <div id="loginError" class="error-message"></div>
+        </form>
+        <a href="index.html" class="back-link">← Вернуться к переводчику</a>
+      </div>
+    </div>
+
+    <!-- Админ-панель -->
+    <div id="adminPanel" class="admin-panel" style="display: none;">
+      <header class="app-header">
+        <div>
+          <h1>Админ-панель</h1>
+          <p class="subtitle">Управление словарём Liekerse</p>
+        </div>
+        <button id="logoutBtn" class="btn-secondary">Выйти</button>
+      </header>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>📝 Добавить слово</h2>
+        </div>
+
+        <div class="dict-form">
+          <div class="field">
+            <label for="ruWord">Русское слово</label>
+            <input id="ruWord" type="text" placeholder="например: привет">
+          </div>
+          <div class="field">
+            <label for="lkWord">Liekerse</label>
+            <input id="lkWord" type="text" placeholder="например: lihek">
+          </div>
+          <button id="addWordBtn" class="btn-primary full">
+            <span>➕</span> Добавить в словарь
+          </button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>📚 Словарь</h2>
+          <div class="panel-actions">
+            <span class="badge" id="wordCount">0 слов</span>
+            <input type="text" id="searchDict" placeholder="🔍 Поиск..." class="search-input">
+          </div>
+        </div>
+
+        <div class="dict-list" id="dictList">
+          <!-- Здесь рендерится таблица слов -->
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>⚙️ Управление данными</h2>
+        </div>
+
+        <div class="dict-actions">
+          <button id="exportBtn" class="btn-secondary">
+            <span>📤</span> Экспорт JSON
+          </button>
+          <button id="importBtn" class="btn-secondary">
+            <span>📥</span> Импорт JSON
+          </button>
+          <button id="clearBtn" class="btn-danger">
+            <span>🗑️</span> Очистить словарь
+          </button>
+        </div>
+
+        <textarea id="jsonArea" class="json-area" placeholder='[{"ru":"привет","lk":"lihek"},{"ru":"мир","lk":"kaar"}]'></textarea>
+      </section>
+
+      <footer class="app-footer">
+        <a href="index.html" class="back-link">← Вернуться к переводчику</a>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Данные для входа (в реальном проекте это должно быть на бэкенде)
+    const ADMIN_CREDENTIALS = {
+      username: 'admin',
+      password: 'admin'
+    };
+
+    const loginScreen = document.getElementById('loginScreen');
+    const adminPanel = document.getElementById('adminPanel');
+    const loginForm = document.getElementById('loginForm');
+    const loginError = document.getElementById('loginError');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Проверка сессии
+    if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+      showAdminPanel();
+    }
+
+    // Авторизация
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+        sessionStorage.setItem('adminLoggedIn', 'true');
+        showAdminPanel();
+        loginError.textContent = '';
+      } else {
+        loginError.textContent = '❌ Неверный логин или пароль';
+      }
+    });
+
+    // Выход
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem('adminLoggedIn');
+      location.reload();
+    });
+
+    function showAdminPanel() {
+      loginScreen.style.display = 'none';
+      adminPanel.style.display = 'block';
+      loadAdminScript();
+    }
+
+    function loadAdminScript() {
+      // Загружаем основной скрипт для работы со словарём
+      const script = document.createElement('script');
+      script.src = 'script.js';
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
+</html>
