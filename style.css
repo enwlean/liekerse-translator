@@ -15,9 +15,7 @@
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
@@ -28,9 +26,8 @@ html, body {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
-    "Roboto", "Helvetica Neue", Arial, sans-serif;
-  background: linear-gradient(135deg, #0f172a 0%, #020617 50%, #000000 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Roboto", sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #020617 50%, #000 100%);
   color: var(--text-main);
   display: flex;
   justify-content: center;
@@ -67,17 +64,15 @@ body {
   font-size: 1.8rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff 0%, #9ca3b0 100%);
+  background: linear-gradient(135deg, #fff 0%, #9ca3b0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .subtitle {
   margin: 6px 0 0;
   font-size: 0.9rem;
   color: var(--text-muted);
-  font-weight: 400;
 }
 
 .admin-link {
@@ -88,9 +83,6 @@ body {
   border-radius: 8px;
   border: 1px solid var(--border-subtle);
   transition: var(--transition);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .admin-link:hover {
@@ -129,8 +121,366 @@ body {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
 }
 
 .panel-header label {
-  font-size
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.panel-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Columns */
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* Inputs */
+select, input, textarea {
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background: var(--bg-card);
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  padding: 12px 14px;
+  outline: none;
+  width: 100%;
+  transition: var(--transition);
+}
+
+select:focus, input:focus, textarea:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 140px;
+  max-height: 400px;
+  line-height: 1.6;
+}
+
+textarea[readonly] {
+  opacity: 0.9;
+  cursor: default;
+}
+
+.char-count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+  text-align: right;
+}
+
+.search-input {
+  max-width: 200px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+/* Buttons */
+.actions, .dict-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+button {
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-card);
+  color: var(--text-main);
+  padding: 10px 18px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+}
+
+button:hover {
+  background: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--border-strong);
+}
+
+.btn-danger {
+  background: transparent;
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+.btn-danger:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+button.full {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Stats */
+.stats-panel {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(11, 14, 24, 1) 100%);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid var(--border-subtle);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-green);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Dictionary */
+.dict-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.dict-list {
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: var(--bg-card);
+}
+
+.dict-list:empty::before {
+  content: "Словарь пуст. Добавьте первые слова.";
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  display: block;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.dict-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  padding: 10px;
+  align-items: center;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.dict-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.dict-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.dict-row button {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+/* Badge */
+.badge {
+  border-radius: 20px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* JSON Area */
+.json-area {
+  width: 100%;
+  margin-top: 12px;
+  font-size: 0.8rem;
+  min-height: 120px;
+  font-family: 'Courier New', monospace;
+}
+
+/* Login Screen */
+.login-screen {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-box {
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-box h1 {
+  margin-bottom: 8px;
+}
+
+.login-form {
+  margin-top: 24px;
+}
+
+.login-form .field {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.error-message {
+  color: var(--accent-red);
+  font-size: 0.85rem;
+  margin-top: 12px;
+  min-height: 20px;
+}
+
+.back-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-top: 16px;
+  transition: var(--transition);
+}
+
+.back-link:hover {
+  color: var(--accent-blue);
+}
+
+/* Footer */
+.app-footer {
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 16px;
+  padding-top: 12px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Scrollbar */
+.dict-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dict-list::-webkit-scrollbar-track {
+  background: var(--bg-elevated);
+  border-radius: 10px;
+}
+
+.dict-list::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 10px;
+}
+
+.dict-list::-webkit-scrollbar-thumb:hover {
+  background: #3a4058;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 16px 10px;
+  }
+  
+  .app {
+    padding: 16px;
+  }
+  
+  .columns {
+    grid-template-columns: 1fr;
+  }
+  
+  .dict-form {
+    grid-template-columns: 1fr;
+  }
+  
+  .app-header h1 {
+    font-size: 1.4rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
